@@ -18,6 +18,6 @@ public class ItemSuper extends Item {
 
     @Override
     public void powerUp(Player player) {
-        player.buff = 2;
+        player.buff++;
     }
 }

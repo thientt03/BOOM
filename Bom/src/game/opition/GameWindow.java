@@ -3,6 +3,8 @@ package game.opition;
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLOutput;
 
 
@@ -15,6 +17,7 @@ public class GameWindow extends JFrame {
     public static boolean isFirePress;
     public static boolean isAnyKeyPress;
     public static boolean isEnterPress;
+    public static boolean mouseClicked = false;
 
     public GameWindow() {
         KeyAdapter keyHander = new KeyAdapter() {
@@ -59,5 +62,25 @@ public class GameWindow extends JFrame {
             }
         };
         addKeyListener(keyHander);
+        MouseAdapter mouseHandler = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                mouseClicked = true;
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                double x = e.getX() - getInsets().left;
+                double y = e.getY() - getInsets().top;
+                Settings.mousePosition.set(x, y);
+            }
+        };
+        addMouseListener(mouseHandler);
+        addMouseMotionListener(mouseHandler);
+
+
+
+
+
     }
 }

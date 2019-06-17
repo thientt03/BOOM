@@ -14,4 +14,8 @@ public class Bot2 extends Bot {
         ai = new AIMedium(GameObject.find(Player.class), this);
     }
 
+    @Override
+    public void run() {
+        super.run();
+    }
 }

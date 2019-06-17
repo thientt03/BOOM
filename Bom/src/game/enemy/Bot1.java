@@ -25,4 +25,9 @@ public class Bot1 extends Bot {
         }
         return true;
     }
+
+    @Override
+    public void run() {
+        super.run();
+    }
 }

@@ -11,4 +11,9 @@ public class Bot3 extends Bot{
         this.position.set(550,415);
         ai = new AILow();
     }
+
+    @Override
+    public void run() {
+        super.run();
+    }
 }

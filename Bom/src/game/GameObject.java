@@ -120,7 +120,7 @@ public class GameObject {//player, background, playerBullet
     //hàm vẽ ảnh
     public void render(Graphics g){
         if (hitBox != null) {
-            hitBox.render(g);
+//            hitBox.render(g);
         }
         if (renderer != null){
             renderer.render(g, this);

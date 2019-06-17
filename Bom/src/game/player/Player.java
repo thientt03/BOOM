@@ -26,7 +26,7 @@ public class Player extends GameObject {
         if (buff == 1) {
             this.renderer = new PlayerRenderer();
         }
-        else if (buff != 1){
+        else{
             this.renderer = new PlayerRenderer2();
         }
     }

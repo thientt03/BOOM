@@ -66,7 +66,7 @@ public class Renderer {
                     (int) (master.position.y - master.anchor.y * image.getHeight()),
                     null
             );
-            drawHitBox̣(g, master);
+//            drawHitBox̣(g, master);
         } else if(images != null) {
             BufferedImage currentImage = images.get(currentIndex);
             g.drawImage(
@@ -75,7 +75,7 @@ public class Renderer {
                     (int) (master.position.y - master.anchor.y * currentImage.getHeight()),
                     null
             );
-            drawHitBox̣(g, master);
+//            drawHitBox̣(g, master);
 
             frameCount++;
             if (frameCount > 10){
@@ -92,10 +92,10 @@ public class Renderer {
         }
     }
 
-    public void drawHitBox̣(Graphics g, GameObject master) {
-        if(master.hitBox != null) {
-            g.setColor(Color.CYAN);
-            g.drawRect((int)master.hitBox.left(), (int)master.hitBox.top(), master.hitBox.width, master.hitBox.height);
-        }
-    }
+//    public void drawHitBox̣(Graphics g, GameObject master) {
+//        if(master.hitBox != null) {
+//            g.setColor(Color.CYAN);
+//            g.drawRect((int)master.hitBox.left(), (int)master.hitBox.top(), master.hitBox.width, master.hitBox.height);
+//        }
+//    }
 }

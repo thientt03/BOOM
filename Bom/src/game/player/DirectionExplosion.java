@@ -2,6 +2,8 @@ package game.player;
 
 import game.GameObject;
 
+import game.Scene.SceneGameover;
+import game.Scene.SceneManager;
 import game.enemy.Bot;
 import game.enemy.Bot1;
 import game.enemy.Enemy;
@@ -30,6 +32,9 @@ public class DirectionExplosion extends GameObject {
         Player player = GameObject.findIntersects(Player.class, this);
         if (player != null) {
            player.deactive();
+           GameObject.clearAll();
+            SceneManager.signNewScene(new SceneGameover());
+
         }
     }
 
