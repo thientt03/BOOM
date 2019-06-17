@@ -2,6 +2,8 @@ package game;
 
 import game.Scene.BackgroundGameover;
 import game.physics.BoxCollider;
+import game.player.Player;
+import game.player.item.ItemBullet;
 import game.renderer.Renderer;
 
 import javax.swing.*;
@@ -48,7 +50,7 @@ public class GameObject {//player, background, playerBullet
     public static <E extends GameObject> E findIntersects(Class <E> cls, GameObject source){
         for (int i = 0; i < objects.size(); i++) {
             GameObject object = objects.get(i);
-            if (object.getClass().isAssignableFrom(cls)
+            if (cls.isAssignableFrom(object.getClass())
                     && object.active
                     && object.intersects(source)){
                 return (E) object;

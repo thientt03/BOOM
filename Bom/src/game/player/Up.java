@@ -9,5 +9,4 @@ public class Up extends DirectionExplosion {
         hitBox = new BoxCollider(this, 10,10);
 
     }
-
 }

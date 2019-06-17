@@ -11,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 public class BackgroundWelcome extends GameObject {
     public BackgroundWelcome(){
-        BufferedImage image = SpriteUtils.loadImage("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\w.png");
+        BufferedImage image = SpriteUtils.loadImage("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\Map\\Background.png");
         this.renderer = new Renderer(image);
         this.position.set(Settings.GAME_WIDTH / 2, Settings.GAME_HEIGHT / 2);
     }

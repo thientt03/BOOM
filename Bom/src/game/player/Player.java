@@ -6,77 +6,105 @@ import game.opition.GameWindow;
 import game.opition.Settings;
 import game.opition.Vector2D;
 import game.physics.BoxCollider;
-import tklibs.Mathx;
+import game.player.item.Item;
+import game.player.level1.PlayerBullet1;
+import game.renderer.Renderer;
 
 public class Player extends GameObject {
     int hp;
+    public int power;
+    public int buff;
+    public static int playerSpeed;
 
     public Player(){
-        this.renderer = new PlayerRenderer();
-        hitBox = new BoxCollider(this, 28,28);
+        hitBox = new BoxCollider(this, 25,25);
         position.set(32+17,32+17);
         hp = 1;
+        power = 1;
+        playerSpeed = 1;
+        buff = 1;
+        if (buff == 1) {
+            this.renderer = new PlayerRenderer();
+        }
+        else if (buff != 1){
+            this.renderer = new PlayerRenderer2();
+        }
     }
     @Override
     public void run() {
         super.run();
         this.move();
-//        this.limit();
+        this.limit();
         this.fire();
+        this.hitItem();
     }
     int Count =0;
-    int boom = 1;
-    boolean planted = false;
+    public static int boom = 1;
+    public boolean planted = false;
     public void fire() {
-        System.out.println(position.x + " " + position.y);
         Count++;
         if (GameWindow.isFirePress && Count > 30){
             if(boom > 0) {
                 planted = true;
-                boom = boom - 1;
-                PlayerBullet bullet = recycle(PlayerBullet.class);
-//                bullet.position.set(this.position.x,this.position.y);
-                //Credit: Supporter Đặng Anh Đức :))
-                if (position.x % 16 != 0 && position.x % 32 < 16) {
-                    bullet.position.x = position.x + (16 - position.x % 16);
-                } else if (position.x % 16 != 0 && position.x % 32 >= 16) {
-                    bullet.position.x = position.x - position.x % 16;
-                }
+                boom = boom-1;
+                PlayerBullet bullet;
+                PlayerBullet1 bullet1;
+                if(power == 1) {
+                    bullet = recycle(PlayerBullet.class);
+                    bullet.position.set(this.position.x,this.position.y);
+                    //Credit: Supporter Đặng Anh Đức :))
+                    if (position.x % 16 != 0 && position.x % 32 < 16) {
+                        bullet.position.x = position.x + (16 - position.x % 16);
+                    } else if (position.x % 16 != 0 && position.x % 32 >= 16) {
+                        bullet.position.x = position.x - position.x % 16;
+                    }
 
-                if (position.y % 16 != 0 && position.y % 32 < 16) {
-                    bullet.position.y = position.y + (16 - position.y % 16);
-                } else if (position.y % 16 != 0 && position.y % 32 >= 16) {
-                    bullet.position.y = position.y - position.y % 16;
+                    if (position.y % 16 != 0 && position.y % 32 < 16) {
+                        bullet.position.y = position.y + (16 - position.y % 16);
+                    } else if (position.y % 16 != 0 && position.y % 32 >= 16) {
+                        bullet.position.y = position.y - position.y % 16;
+                    }
+                } else {
+                    // TODO: dat boom dai
+                    bullet1 = recycle(PlayerBullet1.class);
+                    bullet1.position.set(this.position.x,this.position.y);
+                    //Credit: Supporter Đặng Anh Đức :))
+                    if (position.x % 16 != 0 && position.x % 32 < 16) {
+                        bullet1.position.x = position.x + (16 - position.x % 16);
+                    } else if (position.x % 16 != 0 && position.x % 32 >= 16) {
+                        bullet1.position.x = position.x - position.x % 16;
+                    }
+
+                    if (position.y % 16 != 0 && position.y % 32 < 16) {
+                        bullet1.position.y = position.y + (16 - position.y % 16);
+                    } else if (position.y % 16 != 0 && position.y % 32 >= 16) {
+                        bullet1.position.y = position.y - position.y % 16;
+                    }
+
                 }
+//
                 Count = 0;
             }
         }
     }
 
-//    private void limit() {
-//        if(position.x < 32 + 16) {
-//            position.set(32 + 16, position.y);
-//        }
-//        if(position.x > Settings.GAME_WIDTH - (32 + 16)) {
-//            position.set(
-//                    Settings.GAME_WIDTH - (32 + 16),
-//                    position.y
-//            );
-//        }
-//        if(position.y < 80) {
-//            position.set(position.x, 80);
-//        }
-//        if(position.y > Settings.GAME_HEIGHT - (32 + 16)) {
-//            position.set(
-//                    position.x,
-//                    Settings.GAME_HEIGHT - (32 + 16)
-//            );
-//        }
-//
-//    }
+    private void limit() {
+        if(position.x < 32 + 16) {
+            position.set(32 + 16, position.y);
+        }
+        if(position.x > Settings.GAME_WIDTH - (32 + 16)) {
+            position.set(Settings.GAME_WIDTH - (32 + 16), position.y);
+        }
+        if(position.y < 32+16) {
+            position.set(position.x, 32+16);
+        }
+        if(position.y > Settings.GAME_HEIGHT - (32 + 16)) {
+            position.set(position.x, Settings.GAME_HEIGHT - (32 + 16));
+        }
 
-    private void move() {
-        int playerSpeed = 1;
+    }
+//    int playerSpeed = 1;
+    public void move() {
         double vx = 0;
         double vy = 0;
         if(GameWindow.isUpPress) {
@@ -107,6 +135,13 @@ public class Player extends GameObject {
         // edit>>
         velocity.set(vx, vy);
         velocity.setLength(playerSpeed);
+    }
+    public void hitItem() {
+        Item item = GameObject.findIntersects(Item.class,this);
+        if (item != null){
+            item.deactive();
+            item.powerUp(this);
+        }
     }
 
     public Vector2D trySlideThrough(Vector2D boxAheadPosition, double vx, double vy) {

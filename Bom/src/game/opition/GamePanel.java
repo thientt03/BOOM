@@ -14,6 +14,7 @@ import java.awt.*;
 public class GamePanel extends JPanel {
     public static Player player;
     public static Background background;
+    public static EnemySummoner enemySummoner;
 
     public GamePanel(){
 //        Map map = Map.load("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\map\\mapjson.json");
