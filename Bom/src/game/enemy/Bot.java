@@ -2,6 +2,8 @@ package game.enemy;
 
 import game.GameObject;
 
+import game.Scene.SceneGameover;
+import game.Scene.SceneManager;
 import game.enemy.ai.AI;
 
 import game.map.Platform;
@@ -16,6 +18,7 @@ public class Bot extends GameObject {
     public double steps;
     public int speed = 1;
     public int _direction = -1;
+    public static int damage;
 
     public AI ai;
 
@@ -27,6 +30,7 @@ public class Bot extends GameObject {
         //System.out.println(rest);
         this.steps = MAX_STEPS;
         hitBox = new BoxCollider(this,38,38);
+        damage = 1;
 
     }
 
@@ -37,11 +41,10 @@ public class Bot extends GameObject {
 //        limit();
         this.hitPlayer();
     }
-
     public void hitPlayer() {
-        Player player = GameObject.recycle(Player.class);
+        Player player = GameObject.findIntersects(Player.class,hitBox);
         if (player != null){
-            player.deactive();
+            player.takeDamage(damage);
         }
     }
 

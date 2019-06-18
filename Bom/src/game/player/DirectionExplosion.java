@@ -12,10 +12,12 @@ import game.player.item.Item;
 import game.player.item.ItemBullet;
 
 public class DirectionExplosion extends GameObject {
+    public int damage;
     boolean playerDie;
 
     public DirectionExplosion(){
         playerDie = false;
+        damage = 1;
     }
 
     @Override
@@ -27,14 +29,13 @@ public class DirectionExplosion extends GameObject {
         hitBlock();
     }
 
-
     public void hitPlayer() {
         Player player = GameObject.findIntersects(Player.class, this);
         if (player != null) {
-           player.deactive();
-           GameObject.clearAll();
-            SceneManager.signNewScene(new SceneGameover());
-
+            player.takeDamage(damage);
+//           player.deactive();
+//           GameObject.clearAll();
+//           SceneManager.signNewScene(new SceneGameover());
         }
     }
 

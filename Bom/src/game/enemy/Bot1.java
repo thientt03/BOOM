@@ -20,7 +20,6 @@ public class Bot1 extends Bot {
         if (block != null){
             if (block.isType != 1){
                 return false;
-
             }
         }
         return true;

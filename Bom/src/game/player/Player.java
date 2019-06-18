@@ -1,6 +1,8 @@
 package game.player;
 
 import game.GameObject;
+import game.Scene.SceneGameover;
+import game.Scene.SceneManager;
 import game.map.Platform;
 import game.opition.GameWindow;
 import game.opition.Settings;
@@ -9,13 +11,21 @@ import game.physics.BoxCollider;
 import game.player.item.Item;
 import game.player.level1.PlayerBullet1;
 import game.renderer.Renderer;
+import tklibs.AudioUtils;
+
+import javax.sound.sampled.Clip;
+import java.awt.*;
 
 public class Player extends GameObject {
     int hp;
     public int power;
     public int buff;
     public static int playerSpeed;
-
+    public Renderer renderer1;
+    public Renderer renderer2;
+    public static boolean starCounting;
+    public static int damage;
+    Clip audio;
     public Player(){
         hitBox = new BoxCollider(this, 25,25);
         position.set(32+17,32+17);
@@ -23,12 +33,18 @@ public class Player extends GameObject {
         power = 1;
         playerSpeed = 1;
         buff = 1;
-        if (buff == 1) {
-            this.renderer = new PlayerRenderer();
-        }
-        else{
-            this.renderer = new PlayerRenderer2();
-        }
+        renderer1 = new PlayerRenderer();
+        renderer2 = new PlayerRenderer2();
+        renderer = renderer1;
+//        if (buff == 1) {
+//            this.renderer = new PlayerRenderer();
+//        }
+//        else{
+//            this.renderer = new PlayerRenderer2();
+//        }
+        starCounting = false;
+        damage = 1;
+
     }
     @Override
     public void run() {
@@ -37,7 +53,22 @@ public class Player extends GameObject {
         this.limit();
         this.fire();
         this.hitItem();
+        this.checksuper();
     }
+
+    int transformCount = 0;
+    private void checksuper() {
+        if(starCounting) {
+            transformCount++;
+            if(transformCount > 600) {
+                renderer = renderer1;
+                starCounting = false;
+                transformCount = 0;
+            }
+        }
+    }
+
+
     int Count =0;
     public static int boom = 1;
     public boolean planted = false;
@@ -53,6 +84,8 @@ public class Player extends GameObject {
                     bullet = recycle(PlayerBullet.class);
                     bullet.position.set(this.position.x,this.position.y);
                     //Credit: Supporter Đặng Anh Đức :))
+                    audio = AudioUtils.getSound("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\audio\\bang_bang.wav");
+                    AudioUtils.reply(audio);
                     if (position.x % 16 != 0 && position.x % 32 < 16) {
                         bullet.position.x = position.x + (16 - position.x % 16);
                     } else if (position.x % 16 != 0 && position.x % 32 >= 16) {
@@ -86,6 +119,11 @@ public class Player extends GameObject {
                 Count = 0;
             }
         }
+    }
+    @Override
+    public void reset() {
+        super.reset();
+        AudioUtils.reply(audio);
     }
 
     private void limit() {
@@ -136,11 +174,15 @@ public class Player extends GameObject {
         velocity.set(vx, vy);
         velocity.setLength(playerSpeed);
     }
+
     public void hitItem() {
         Item item = GameObject.findIntersects(Item.class,this);
         if (item != null){
+            item.sound();
+            item.reset();
             item.deactive();
             item.powerUp(this);
+
         }
     }
 
@@ -178,4 +220,18 @@ public class Player extends GameObject {
         playerExplosion.position.set(this.position);
     }
 
+    public void takeDamage(int damage) {
+        if (!starCounting){
+            hp -= damage;
+            if (hp <= 0){
+                hp = 0;
+                this.deactive();
+                GameObject.clearAll();
+                SceneManager.signNewScene(new SceneGameover());
+            } else {
+                // rơi vào trạng thái bất tử
+                starCounting = true;
+            }
+        }
+    }
 }

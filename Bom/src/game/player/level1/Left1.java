@@ -8,7 +8,7 @@ public class Left1 extends DirectionExplosion {
 
     public Left1(){
         renderer = new Renderer("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\explosions\\level1\\Left", true);
-        hitBox = new BoxCollider(this, 30,10);
+        hitBox = new BoxCollider(this, 80,10);
 
     }
 }

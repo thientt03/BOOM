@@ -22,7 +22,7 @@ public class PlayerBullet1 extends GameObject {
         count = 0;
         hitBox = new BoxCollider(this, 44, 44);
         damage = 1;
-        renderer = new Renderer("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\Boomm");
+        renderer = new Renderer("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\explosions\\level1\\Booom");
     }
 
     @Override

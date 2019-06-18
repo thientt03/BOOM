@@ -32,8 +32,10 @@ import game.opition.GameWindow;
 import game.opition.Settings;
 import game.opition.Vector2D;
 import game.renderer.Renderer;
+import tklibs.AudioUtils;
 import tklibs.SpriteUtils;
 
+import javax.sound.sampled.Clip;
 import java.awt.image.BufferedImage;
 
 
@@ -43,6 +45,7 @@ public class BackgroundWelcome extends GameObject {
     Renderer background3;
     Renderer backgroundHD;
     Renderer backgroundHD2;
+    Clip audio;
     public BackgroundWelcome(){
         background1 = new Renderer(SpriteUtils.loadImage("assets/images/backgpund/Background.png"));
         background2 = new Renderer(SpriteUtils.loadImage("assets/images/backgpund/Bat dau 1.png"));
@@ -51,6 +54,8 @@ public class BackgroundWelcome extends GameObject {
         //backgroundHD2 = new Renderer(SpriteUtils.loadImage("assets/images/hd3.png"));
         this.renderer = background1;
         this.position.set(Settings.GAME_WIDTH / 2, Settings.GAME_HEIGHT / 2);
+        audio = AudioUtils.getSound("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\audio\\soundMenu.wav");
+        AudioUtils.reply(audio);
     }
 
     int x=0;
@@ -64,8 +69,11 @@ public class BackgroundWelcome extends GameObject {
             if(GameWindow.mouseClicked ){
                 Vector2D toMouse = Settings.mousePosition.clone();
                 System.out.println("Hello");
+                AudioUtils.pause(audio);
                 SceneManager.signNewScene(new SceneStage1());
                 GameWindow.mouseClicked = false;
+
+
             }
 
         }else if (isMouseOnButton2()){

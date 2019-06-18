@@ -4,7 +4,9 @@ import game.GameObject;
 import game.opition.Settings;
 import game.physics.BoxCollider;
 import game.renderer.Renderer;
+import tklibs.AudioUtils;
 
+import javax.sound.sampled.Clip;
 import java.awt.*;
 
 public class PlayerBullet extends GameObject {
@@ -16,6 +18,7 @@ public class PlayerBullet extends GameObject {
     Down down;
     Left left;
     Right right;
+    Clip audio;
     public PlayerBullet(){
         count = 0;
         hitBox = new BoxCollider(this, 44, 44);
@@ -63,7 +66,8 @@ public class PlayerBullet extends GameObject {
 
     }
 
-//    private void limit() {
+
+    //    private void limit() {
 //        if(position.x < 44) {
 //            position.set(66, position.y);
 //        }
