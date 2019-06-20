@@ -26,6 +26,8 @@ public class Player extends GameObject {
     public static boolean starCounting;
     public static int damage;
     Clip audio;
+    public static int countBoss =0;
+
     public Player(){
         hitBox = new BoxCollider(this, 25,25);
         position.set(32+17,32+17);

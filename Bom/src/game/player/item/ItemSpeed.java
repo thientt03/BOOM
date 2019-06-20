@@ -13,7 +13,7 @@ public class ItemSpeed extends Item{
         BufferedImage image = SpriteUtils.loadImage("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\Item\\speedmini.png");
         renderer = new Renderer(image);
         hitBox = new BoxCollider(this,15,15);
-        this.position.set(48,210);
+        this.position.set(48,302);
 
     }
 

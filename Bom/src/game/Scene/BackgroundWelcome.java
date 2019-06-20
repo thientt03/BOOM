@@ -56,6 +56,7 @@ public class BackgroundWelcome extends GameObject {
         this.position.set(Settings.GAME_WIDTH / 2, Settings.GAME_HEIGHT / 2);
         audio = AudioUtils.getSound("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\audio\\soundMenu.wav");
         AudioUtils.reply(audio);
+        AudioUtils.loopForever(audio);
     }
 
     int x=0;
@@ -70,7 +71,7 @@ public class BackgroundWelcome extends GameObject {
                 Vector2D toMouse = Settings.mousePosition.clone();
                 System.out.println("Hello");
                 AudioUtils.pause(audio);
-                SceneManager.signNewScene(new SceneStage1());
+                SceneManager.signNewScene(new SceneStage2());
                 GameWindow.mouseClicked = false;
 
 
