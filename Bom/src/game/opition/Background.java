@@ -17,6 +17,7 @@ public class Background extends GameObject {
         AudioUtils.reply(audio);
         AudioUtils.loopForever(audio);
     }
+    //Lỗi trỏ vào path.
 
     @Override
     public void reset() {
