@@ -15,6 +15,7 @@ public class PlayerExplosion extends GameObject {
 
     public PlayerExplosion(){
         audio = AudioUtils.getSound("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\audio\\die.wav");
+        //sai đường dẫn path
         AudioUtils.reply(audio);
     }
 
