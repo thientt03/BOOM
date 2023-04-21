@@ -24,6 +24,7 @@ public class PlayerBullet extends GameObject {
         hitBox = new BoxCollider(this, 44, 44);
         damage = 1;
         renderer = new Renderer("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\Boomm");
+        //trỏ sai đường dẫn path
     }
 
     @Override
