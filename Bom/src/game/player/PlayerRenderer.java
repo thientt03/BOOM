@@ -20,7 +20,7 @@ public class PlayerRenderer extends Renderer {
             path[1] = "C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\Minion_Down";
             path[2] = "C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\Minion_Right";
             path[3] = "C:\\Users\\thien\\Desktop\\Bom\\src\\game\\images\\Minion_Left";
-
+//sai đường dẫn path
             this.upRenderer = new Renderer(path[0]);
             this.downRenderer = new Renderer(path[1]);
             this.rightRenderer = new Renderer(path[2]);
