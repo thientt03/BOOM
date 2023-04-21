@@ -87,6 +87,7 @@ public class Player extends GameObject {
                     bullet.position.set(this.position.x,this.position.y);
                     //Credit: Supporter Đặng Anh Đức :))
                     audio = AudioUtils.getSound("C:\\Users\\thien\\Desktop\\Bom\\src\\game\\audio\\bang_bang.wav");
+                    //trỏ sai đường dẫn path nhạc
                     AudioUtils.reply(audio);
                     if (position.x % 16 != 0 && position.x % 32 < 16) {
                         bullet.position.x = position.x + (16 - position.x % 16);
