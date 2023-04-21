@@ -24,3 +24,4 @@ public class Down extends DirectionExplosion {
         AudioUtils.reply(audio);
     }
 }
+//Toàn bộ cử động đều trỏ sai vào path
