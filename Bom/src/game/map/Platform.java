@@ -65,4 +65,5 @@ public class Platform extends GameObject {
 
         return platform;
     }
+    //lỗi trỏ vào path trên máy tính
 }
